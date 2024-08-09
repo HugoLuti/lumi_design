@@ -1,0 +1,42 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Liste des utilisateurs
+{% endblock %}
+
+{% block body %}
+
+	<h1>Liste des utilisateurs</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>{{ knp_pagination_sortable(users, 'email', 'u.email')}}</th>
+				<th>{{ knp_pagination_sortable(users, 'first_name', 'u.firstName')}}</th>
+				<th>{{ knp_pagination_sortable(users, 'last_name', 'u.lastName')}}</th>
+				<th>{{ knp_pagination_sortable(users, 'created_at', 'u.createdAt')}}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for user in users %}
+				<tr>
+					<td>
+						<a href="{{ path('admin_user_detail', {'id': user.id}) }}" target="_blank">{{ user.email }}</a>
+					</td>
+					<td>{{ user.firstName }}</td>
+					<td>{{ user.lastName }}</td>
+					<td>{{ user.createdAt|date('d/m/Y') }}</td>
+					<td>
+						<a href="{{ path('admin_user_update', {'id': user.id}) }}" class="btn btn-info" target= "_blank">Modifier</a>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{{knp_pagination_render(users)}}
+
+	<main>
+		{% if users is empty %}
+			<p>Aucun utilisateur trouvé.</p>
+		{% endif %}
+	</main>
+{% endblock %}

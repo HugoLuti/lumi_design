@@ -1,0 +1,43 @@
+{% extends 'front/base.html.twig' %}
+
+{% block title %}Détails de la Facture
+{% endblock %}
+
+{% block body %}
+	<h1>Détails de la Facture</h1>
+
+	<h2>Facture
+		{{ order.oderNumber }}</h2>
+	<p>Date de Création :
+		{{ order.createdAt|date('d/m/Y') }}</p>
+	<p>Statut :
+		{{ order.status }}</p>
+	<p>Date de Paiement :
+		{{ order.paidAt ? order.paidAt|date('d/m/Y') : 'Non payé' }}</p>
+
+	<h3>Articles</h3>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Produit</th>
+				<th>Quantité</th>
+				<th>Prix Unitaire</th>
+				<th>Total</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for item in order.orderItems %}
+				<tr>
+					<td>{{ item.product.name }}</td>
+					<td>{{ item.quantity }}</td>
+					<td>{{ item.price }}
+						€</td>
+					<td>{{ item.price * item.quantity }}
+						€</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('front_profile_index') }}" class="btn btn-primary">Retour aux Factures</a>
+{% endblock %}

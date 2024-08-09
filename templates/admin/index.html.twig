@@ -1,0 +1,14 @@
+{% extends "admin/base.html.twig" %}
+
+{% block title %}
+	{{ parent() }}Création d'admin
+{% endblock %}
+
+{% block body %}
+	<h1>Créer un nouvel admin</h1>
+
+    {{ form_start(formAdmin) }}
+    {{ form_widget(formAdmin) }}
+    <button type="submit" class="btn btn-primary">Créer</button>
+    {{ form_end(formAdmin) }}
+{% endblock %}

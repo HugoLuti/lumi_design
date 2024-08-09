@@ -1,0 +1,52 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Détails de l'utilisateur{% endblock %}
+
+{% block body %}
+    <h1>Détails de l'utilisateur</h1>
+
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <td>{{ user.id }}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td>{{ user.firstName }}</td>
+        </tr>
+        <tr>
+            <th>Prénom</th>
+            <td>{{ user.lastName }}</td>
+        </tr>
+        <tr>
+            <th>Adresse</th>
+            <td>{{ user.address }}</td>
+        </tr>
+        <tr>
+            <th>Code Postal</th>
+            <td>{{ user.postalCode }}</td>
+        </tr>
+        <tr>
+            <th>Ville</th>
+            <td>{{ user.city }}</td>
+        </tr>
+        <tr>
+            <th>Numéro de téléphone</th>
+            <td>{{ user.phoneNumber }}</td>
+        </tr>
+        <tr>
+            <th>Date de création</th>
+            <td>{{ user.createdAt|date('d/m/Y') }}</td>
+        </tr>
+        <tr>
+            <th>Actif</th>
+            <td>{{ user.isActive ? 'Oui' : 'Non' }}</td>
+        </tr>
+    </table>
+
+    <a href="{{ path('admin_show_users') }}" class="btn btn-primary">Retour à la liste</a>
+{% endblock %}

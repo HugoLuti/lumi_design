@@ -1,0 +1,38 @@
+{% extends 'front/base.html.twig' %}
+
+{% block title %}Mon Profil
+{% endblock %}
+
+{% block body %}
+	<h1>Mes Factures</h1>
+
+	{% if orders is empty %}
+		<p>Aucune facture trouvée.</p>
+	{% else %}
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Numéro de Facture</th>
+					<th>Date de Création</th>
+					<th>Statut</th>
+					<th>Total</th>
+					<th>Détails</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for order in orders %}
+					<tr>
+						<td>{{ order.oderNumber }}</td>
+						<td>{{ order.createdAt|date('d/m/Y') }}</td>
+						<td>{{ order.status }}</td>
+						<td>{{ order.orderItems|sum(orderItem => orderItem.price * orderItem.quantity) }}
+							€</td>
+						<td>
+							<a href="{{ path('front_profile_details', { id: order.id }) }}" class="btn btn-info btn-sm">Voir</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	{% endif %}
+{% endblock %}
